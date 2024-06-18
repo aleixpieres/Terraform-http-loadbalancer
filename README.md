@@ -51,7 +51,7 @@ terraform apply
 1. Open the URL of the load balancer in your browser:
 
 ```
-curl http://https-loadbalancer-IP::80
+curl http://$(terraform output load-balancer-ip):80
 ```
 
 You should see the instance details from `group1`.
