@@ -16,6 +16,16 @@ data "template_file" "group-startup-script" {
   }
 }
 
+resource "google_compute_health_check" "tcp-health-check" {
+  name = "tcp-health-check"
+
+  timeout_sec        = 1
+  check_interval_sec = 1
+
+  tcp_health_check {
+    port = "80"
+  }
+}
 
 #### MIG TEMPLATE 1
 module "mig1_template" {
@@ -43,8 +53,16 @@ module "mig1" {
   version           = "~> 7.9"
   instance_template = module.mig1_template.self_link
   region            = var.group1_region
+  wait_for_instances = true
+  autoscaling_enabled  = true
+  health_check_name = google_compute_health_check.tcp-health-check.name
+  autoscaling_cpu = [ {
+    target = 0.6
+  }] 
+  min_replicas      = 2
+  max_replicas      = 4
+  cooldown_period   = 120
   hostname          = "${var.network_prefix}-group1"
-  target_size       = var.target_size
   named_ports = [{
     name = "http",
     port = 80
@@ -79,7 +97,15 @@ module "mig2" {
   instance_template = module.mig2_template.self_link
   region            = var.group2_region
   hostname          = "${var.network_prefix}-group2"
-  target_size       = var.target_size
+   wait_for_instances = true
+  autoscaling_enabled  = true
+  health_check_name = google_compute_health_check.tcp-health-check.name
+  autoscaling_cpu = [ {
+    target = 0.6
+  }] 
+  min_replicas      = 2
+  max_replicas      = 4
+  cooldown_period   = 120
   named_ports = [{
     name = "http",
     port = 80
