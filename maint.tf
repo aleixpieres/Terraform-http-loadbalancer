@@ -1,3 +1,10 @@
+#### VPC NETWORK
+#creating Network were we are going to deploy all the resources
+resource "google_compute_network" "default" {
+  name                    = var.network_prefix
+  auto_create_subnetworks = "false" #we only want 2 subents therefore we will create them manually
+}
+
 #### SUBNETWORK
 #creating subnet 1 for mig group 1
 resource "google_compute_subnetwork" "group1" {
@@ -105,11 +112,3 @@ module "gce-lb-http" {
   }
 }
 # [END cloudloadbalancing_ext_http_gce]
-
-
-#### VPC NETWORK
-#creating Network were we are going to deploy all the resources
-resource "google_compute_network" "default" {
-  name                    = var.network_prefix
-  auto_create_subnetworks = "false" #we only want 2 subents therefore we will create them manually
-}
