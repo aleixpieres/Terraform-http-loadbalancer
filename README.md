@@ -26,7 +26,7 @@ export GOOGLE_PROJECT=$(gcloud config get-value project)
 ## Run Terraform
 
 ```
-terraform init
+terraform init -upgrade
 terraform apply
 ```
 
