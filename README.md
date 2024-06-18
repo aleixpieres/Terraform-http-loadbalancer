@@ -1,4 +1,4 @@
-# Terraform-https-loadbalancer
+# Terraform-http-loadbalancer
 
 ## Install Terraform
 
