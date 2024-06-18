@@ -1,5 +1,7 @@
 # Terraform-http-loadbalancer
 
+### Repository Hit Counter [![HitCount](https://hits.dwyl.com/aleixpieres/Terraform-http-loadbalancer.svg?style=flat-square)](http://hits.dwyl.com/aleixpieres/Terraform-http-loadbalancer)
+
 ## Install Terraform
 
 1. Install Terraform if it is not already installed (visit [terraform.io](https://terraform.io) for other distributions):
